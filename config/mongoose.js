@@ -1,6 +1,6 @@
 const mongoose=require('mongoose');
 
-mongoose.connect('mongodb://localhost/to_do_list');
+mongoose.connect('mongodb://localhost/ASEAN');
 
 const db=mongoose.connection;
 

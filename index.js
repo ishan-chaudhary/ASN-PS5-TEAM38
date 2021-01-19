@@ -8,7 +8,7 @@ const flash = require('connect-flash');
 const db = require('./config/mongoose');
 
 app.use(session({
-  secret: 'DTUFTE',
+  secret: 'ASEAN-HACKATHON',
   saveUninitialized: true,
   resave: true
 }));
@@ -35,6 +35,6 @@ app.listen(port, function (err) {
     console.log('Error in opening server');
     return;
   }
-  console.log('server is serving');
+  console.log('server is serving on port',port);
   return;
 })

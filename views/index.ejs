@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/cube.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin="" />
+    <link href="./style.css" rel="stylesheet" type="text/css">
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+    <title>Asean India Hackathon</title>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand">liAISon</a>
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+    <div class="container-fluid" style="height:89vh">
+        <div class="row"
+            style="display:flex;flex-direction: row;flex-wrap: wrap;justify-content: space-around;margin-top: 20px; height: 100%;">
+            <div class="col-8">
+                <div id="mapid" style="height:100%;width:100%">
+
+                </div>
+            </div>
+            <div class="col-4">
+                <div id="chart-container"
+                    style="display: flex;flex-direction: column;justify-content: space-evenly;align-items: center;">
+                    <p>Select the name of commodity:-</p>
+                    <select class="js-example-responsive" style="width: 200px;">
+                        <option>Encounter</option>
+                        <option>Loitering</option>
+                    </select><br>
+                    <div class="scene">
+                        <div class="cube">
+                            <div class="cube__face cube__face--front">
+                                <div id="pie-chart-container" style="height: 400px;width: 400px; margin: auto;">
+                                    <canvas id="pieChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="cube__face cube__face--back">
+                                <div id="radar-chart-container" style="height: 400px;width: 400px; margin: auto;">
+                                    <canvas id="radarChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="cube__face cube__face--right">
+                                <div id="bar-chart-container" style="height: 400px;width: 400px; margin: auto;">
+                                    <canvas id="barChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="cube__face cube__face--left">left</div>
+                            <div class="cube__face cube__face--top">top</div>
+                            <div class="cube__face cube__face--bottom">bottom</div>
+                        </div>
+                    </div>
+                    <diV>
+                        <p class="radio-group" style="font-size: 2rem;">
+                            <label>
+                                <input type="radio" name="rotate-cube-side" value="front" checked /> <span
+                                    data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom"><i
+                                        class="fas fa-chart-pie"></i></span>
+                            </label>
+                            <label>
+                                <input type="radio" name="rotate-cube-side" value="right" />
+                                <i class="fas fa-chart-bar"></i>
+                            </label>
+                            <label>
+                                <input type="radio" name="rotate-cube-side" value="back" /> <i
+                                    class="fas fa-chart-line"></i>
+                            </label>
+                        </p>
+                    </diV>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery-ui.min.js"></script>
+    <script src="/js/jquery.countdown.min.js"></script>
+    <script src="/js/jquery.nice-select.min.js"></script>
+    <script src="/js/jquery.zoom.min.js"></script>
+    <script src="/js/jquery.dd.min.js"></script>
+    <script src="/js/jquery.slicknav.js"></script>
+    <script src="/js/owl.carousel.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    <!-- <script src="/ajax/chat_engine.js"></script> -->
+    <script src="/js/heatmap.js"></script>
+    <script src="/js/leaflet-heatmap.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+
+    <script>
+        // import "heatmap.js";
+        // import '../assets/js/leaflet-heatmap';
+        $(document).ready(function () {
+            console.log('doc ready');
+            $('.js-example-responsive').select2({
+                closeOnSelect: true,
+                theme: "classic"
+            });
+        });
+        var testData = {
+            max: 20,
+            data: [{
+                lat: 29.383547,
+                lng: 79.463956,
+                count: 20
+            }, {
+                lat: 29.946656,
+                lng: 78.152984,
+                count: 17
+            }, {
+                lat: 29.581709,
+                lng: 80.212158,
+                count: 15
+            }, {
+                lat: 29.839006,
+                lng: 79.774028,
+                count: 12
+            }, {
+                lat: 29.59318,
+                lng: 29.59318,
+                count: 12
+            }, {
+                lat: 30.379608,
+                lng: 78.438862,
+                count: 12
+            }, {
+                lat: 30.314882,
+                lng: 78.033458,
+                count: 11
+            }, {
+                lat: 30.152586,
+                lng: 78.772548,
+                count: 11
+            }, {
+                lat: 30.746471,
+                lng: 79.495277,
+                count: 10
+            }, {
+                lat: 30.402772,
+                lng: 79.331771,
+                count: 9
+            }]
+        };
+        var baseLayer = L.tileLayer(
+            'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '...',
+            maxZoom: 25
+        }
+        );
+        var cfg = {
+            // radius should be small ONLY if scaleRadius is true (or small radius is intended)
+            // if scaleRadius is false it will be the constant radius used in pixels
+            "radius": 0.07,
+            "maxOpacity": .8,
+            // scales the radius based on map zoom
+            "scaleRadius": true,
+            // if set to false the heatmap uses the global maximum for colorization
+            // if activated: uses the data maximum within the current map boundaries
+            //   (there will always be a red spot with useLocalExtremas true)
+            "useLocalExtrema": true,
+            // which field name in your data represents the latitude - default "lat"
+            latField: 'lat',
+            // which field name in your data represents the longitude - default "lng"
+            lngField: 'lng',
+            // which field name in your data represents the data value - default "value"
+            valueField: 'count'
+        };
+        var heatmapLayer = new HeatmapOverlay(cfg);
+        function showheatMapLayer(testData) {
+            heatmapLayer.setData(testData);
+        }
+        showheatMapLayer(testData);
+    </script>
+    <script>
+        function changeHandling() {
+            $('.js-example-responsive').change(function (e) {
+                let crop = $(this).val();
+                $.ajax({
+                    type: "post",
+                    url: "/maps/fetch-heatmap-data/crop",
+                    data: {
+                        crop: crop
+                    },
+                    success: function (data) {
+                        let testData = {
+                            max: 20,
+                            data: data.data.mapData
+                        };
+                        console.log(testData);
+                        showheatMapLayer(testData);
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            });
+        }
+        changeHandling();
+        var map = new L.Map('mapid', {
+            center: new L.LatLng(-24.5,7.1),
+            zoom: 4,
+            layers: [baseLayer, heatmapLayer]
+        });
+        // var greenIcon = L.icon({
+        //     iconUrl: '/img/marker.png',
+        //     iconSize: [38, 70], // size of the icon 
+        //     iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+        //     tooltipAnchor: [0, -41]
+        // });
+    </script>
+        <script src="/ajax/chart.js"></script>
+        <script src="/ajax/cube.js"></script>
+</body>
+
+</html>
