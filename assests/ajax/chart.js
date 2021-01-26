@@ -16,7 +16,7 @@ $(document).ready(function () {
         for (i in data) {
             var myIcon = L.icon({
                 iconUrl: '/ajax/ship_icon.png',
-                iconSize: [20, 20],
+                iconSize: [10, 10],
                 iconAnchor: [22, 94],
                 popupAnchor: [-3, -76],
             });

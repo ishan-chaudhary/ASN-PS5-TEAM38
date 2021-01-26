@@ -88,7 +88,7 @@
 
         </div>
     </div>
-    
+
     <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/jquery-ui.min.js"></script>
@@ -119,48 +119,29 @@
             });
         });
         var testData = {
-            max: 20,
-            data: [{
-                lat: 29.383547,
-                lng: 79.463956,
-                count: 20
-            }, {
-                lat: 29.946656,
-                lng: 78.152984,
-                count: 17
-            }, {
-                lat: 29.581709,
-                lng: 80.212158,
-                count: 15
-            }, {
-                lat: 29.839006,
-                lng: 79.774028,
-                count: 12
-            }, {
-                lat: 29.59318,
-                lng: 29.59318,
-                count: 12
-            }, {
-                lat: 30.379608,
-                lng: 78.438862,
-                count: 12
-            }, {
-                lat: 30.314882,
-                lng: 78.033458,
-                count: 11
-            }, {
-                lat: 30.152586,
-                lng: 78.772548,
-                count: 11
-            }, {
-                lat: 30.746471,
-                lng: 79.495277,
-                count: 10
-            }, {
-                lat: 30.402772,
-                lng: 79.331771,
-                count: 9
-            }]
+            max: 100,
+            data: [
+                {
+                    lat: -29.24959694,
+                    lng: 6.07754487,
+                    count: 50
+                }, {
+                    lat: -18.63018791,
+                    lng: 5.50969497,
+                    count: 100
+                }, {
+                    lat: -35.56050877,
+                    lng: 32.30296846,
+                    count: 76
+                }, {
+                    lat: -10.23546636,
+                    lng: 5.88451016,
+                    count: 60
+                }, {
+                    lat: -28.41106932,
+                    lng: 38.65464382,
+                    count: 55
+                }]
         };
         var baseLayer = L.tileLayer(
             'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -171,7 +152,7 @@
         var cfg = {
             // radius should be small ONLY if scaleRadius is true (or small radius is intended)
             // if scaleRadius is false it will be the constant radius used in pixels
-            "radius": 0.07,
+            "radius": 8,
             "maxOpacity": .8,
             // scales the radius based on map zoom
             "scaleRadius": true,
@@ -218,7 +199,7 @@
         }
         changeHandling();
         var map = new L.Map('mapid', {
-            center: new L.LatLng(-24.5,7.1),
+            center: new L.LatLng(-24.5, 7.1),
             zoom: 4,
             layers: [baseLayer, heatmapLayer]
         });
@@ -229,8 +210,8 @@
         //     tooltipAnchor: [0, -41]
         // });
     </script>
-        <script src="/ajax/chart.js"></script>
-        <script src="/ajax/cube.js"></script>
+    <script src="/ajax/chart.js"></script>
+    <script src="/ajax/cube.js"></script>
 </body>
 
 </html>
