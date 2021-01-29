@@ -70,5 +70,6 @@ for(let month in data ){
     bar.total.push(data[month].total);
     bar.ship = data[month].shipname
   }
-  return res.status(200).json({bar:bar});
+  let ship = await Encounter.findOne({mmsi:mmsi}).select('mmsi shipname callsign flag imo');
+  return res.status(200).json({bar:bar , ship : ship});
 }

@@ -39,29 +39,32 @@
             <div class="col-4">
                 <div id="chart-container"
                     style="display: flex;flex-direction: column;justify-content: space-evenly;align-items: center;">
-                    <p>Select the name of commodity:-</p>
+                    <p>Select Data Source:-</p>
                     <select class="js-example-responsive" style="width: 200px;">
                         <option>Encounter</option>
                         <option>Loitering</option>
-                    </select><br>
+                    </select>
+                    <p></p>
                     <div class="scene">
                         <div class="cube">
                             <div class="cube__face cube__face--front">
                                 <div id="pie-chart-container" style="height: 400px;width: 400px; margin: auto;">
-                                    <canvas id="pieChart"></canvas>
+                                    <!-- <canvas id="pieChart"></canvas> -->
+            
                                 </div>
                             </div>
                             <div class="cube__face cube__face--back">
-                                <div id="radar-chart-container" style="height: 400px;width: 400px; margin: auto;">
-                                    <canvas id="radarChart"></canvas>
-                                </div>
-                            </div>
-                            <div class="cube__face cube__face--right">
                                 <div id="bar-chart-container" style="height: 400px;width: 400px; margin: auto;">
                                     <canvas id="barChart"></canvas>
+                                </div>                             
+                            </div>
+                            <div class="cube__face cube__face--right">
+                                <div id="radar-chart-container" style="height: 400px;width: 400px; margin: auto;">
+                                    <table id="ship-Info-Table" style="color: black; font-size: small; border: black; height: 50%; width:200px;line-height: 50px; margin: auto;border: 1px solid black;margin-top: 20px;">
+                                    </table>                               
                                 </div>
                             </div>
-                            <div class="cube__face cube__face--left">left</div>
+                            <div class="cube__face cube__face--left"><canvas id="radarChart"></canvas></div>
                             <div class="cube__face cube__face--top">top</div>
                             <div class="cube__face cube__face--bottom">bottom</div>
                         </div>
@@ -89,7 +92,18 @@
 
         </div>
     </div>
-    <img src= '/image/LIAISON LOGO.png' style="position: absolute;bottom: 5px; right: 5px; height: 100px; width: 100px;">
+    <br>
+    <br>
+    <script type="text/javascript">
+        // Map appearance
+        var width="100%";         // width in pixels or percentage
+        var height="300";         // height in pixels
+        var latitude="-24.5";     // center latitude (decimal degrees)
+        var longitude="7.1";    // center longitude (decimal degrees)
+        var zoom="4";             // initial zoom (between 3 and 18)
+    </script>
+    <script type="text/javascript" src="https://www.vesselfinder.com/aismap.js"></script>
+    <img src= '/image/LIAISON LOGO.png' style="position: fixed;bottom: 5px; right: 5px; height: 100px; width: 100px;">
 
     <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>

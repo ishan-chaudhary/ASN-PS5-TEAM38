@@ -5,7 +5,6 @@ $(document).ready(function () {
         url: '/maps/markers',
         success: function (data) {
             addMarkers(data);
-            chartDisplayFunction('DEHRADUN');
         },
         error: function (err) {
             console.log(err);
@@ -31,6 +30,7 @@ $(document).ready(function () {
         $('.leaflet-marker-icon').on('click', function (e) {
             var el = $(e.srcElement || e.target);
             mmsi = el.attr('data-mmsi');
+            console.log(e);
             chartDisplayFunction(mmsi);
         });
     }
@@ -43,7 +43,7 @@ function chartDisplayFunction(mmsi) {
         url: `/maps/chart?mmsi=${mmsi}`,
         success: function (data) {
             // addPieChart(data, mmsi);
-            // addRadarChart(data, mmsi);
+            addTable(data.ship)
             addBarChart(data, mmsi);
         },
         error: function (err) {
@@ -85,6 +85,26 @@ function addBarChart(data, mmsi) {
             },
         }
     });
+}
+
+function addTable(data){
+    $('tr').remove();
+    $('.cube__face--front').css('background-image',`url('https://www.myshiptracking.com/requests/getimage-normal/${data['mmsi']}.jpg')`)
+    $('#ship-Info-Table').append(`
+    <tr>
+    <th>Property</th>
+    <th>Value</th>
+    </tr>
+    `)
+    for(let x in data){
+        if(x == '_id') continue;
+        $('#ship-Info-Table').append(`
+        <tr>
+        <td>${x}</td>
+        <td>${data[x]}</td>
+        </tr>
+        `) 
+    }
 }
 
 function addRadarChart(data, District) {
