@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
         integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
         crossorigin="" />
-    <link href="./style.css" rel="stylesheet" type="text/css">
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
         integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
         crossorigin=""></script>
@@ -50,18 +49,19 @@
                             <div class="cube__face cube__face--front">
                                 <div id="pie-chart-container" style="height: 400px;width: 400px; margin: auto;">
                                     <!-- <canvas id="pieChart"></canvas> -->
-            
+
                                 </div>
                             </div>
                             <div class="cube__face cube__face--back">
                                 <div id="bar-chart-container" style="height: 400px;width: 400px; margin: auto;">
                                     <canvas id="barChart"></canvas>
-                                </div>                             
+                                </div>
                             </div>
                             <div class="cube__face cube__face--right">
                                 <div id="radar-chart-container" style="height: 400px;width: 400px; margin: auto;">
-                                    <table id="ship-Info-Table" style="color: black; font-size: small; border: black; height: 50%; width:200px;line-height: 50px; margin: auto;border: 1px solid black;margin-top: 20px;">
-                                    </table>                               
+                                    <table id="ship-Info-Table"
+                                        style="color: black; font-size: small; border: black; height: 50%; width:200px;line-height: 50px; margin: auto;border: 1px solid black;margin-top: 20px;">
+                                    </table>
                                 </div>
                             </div>
                             <div class="cube__face cube__face--left"><canvas id="radarChart"></canvas></div>
@@ -96,14 +96,14 @@
     <br>
     <script type="text/javascript">
         // Map appearance
-        var width="100%";         // width in pixels or percentage
-        var height="300";         // height in pixels
-        var latitude="-24.5";     // center latitude (decimal degrees)
-        var longitude="7.1";    // center longitude (decimal degrees)
-        var zoom="4";             // initial zoom (between 3 and 18)
+        var width = "100%";         // width in pixels or percentage
+        var height = "500";         // height in pixels
+        var latitude = "-24.5";     // center latitude (decimal degrees)
+        var longitude = "7.1";    // center longitude (decimal degrees)
+        var zoom = "4";             // initial zoom (between 3 and 18)
     </script>
     <script type="text/javascript" src="https://www.vesselfinder.com/aismap.js"></script>
-    <img src= '/image/LIAISON LOGO.png' style="position: fixed;bottom: 5px; right: 5px; height: 100px; width: 100px;">
+    <img src='/image/LIAISON LOGO.png' style="position: fixed;bottom: 5px; right: 5px; height: 100px; width: 100px;">
 
     <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
